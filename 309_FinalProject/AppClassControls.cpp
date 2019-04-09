@@ -412,23 +412,64 @@ void Application::ProcessKeyboard(void)
 	if (bMultiplier)
 		fMultiplier = 5.0f;
 
+
+	matrix4 m4View = m_pCameraMngr->GetViewMatrix();
+
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	//	m_pCameraMngr->MoveForward(m_fMovementSpeed * fMultiplier);
+
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	//	m_pCameraMngr->MoveForward(-m_fMovementSpeed * fMultiplier);
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		m_pCameraMngr->MoveForward(m_fMovementSpeed * fMultiplier);
+	{
+		vector3 v3Forward = m_pCameraMngr->GetForward();
+		vector3 v3newPos = m_pCameraMngr->GetPosition() + fMultiplier * m_fMovementSpeed * glm::normalize(vector3(v3Forward.x, 0.0f, v3Forward.z));
+		m_pCameraMngr->SetPositionTargetAndUpward(
+			v3newPos,
+			v3newPos + m_pCameraMngr->GetForward(),
+			AXIS_Y
+		);
+	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		m_pCameraMngr->MoveForward(-m_fMovementSpeed * fMultiplier);
+	{
+		vector3 v3Forward = m_pCameraMngr->GetForward();
+		vector3 v3newPos = m_pCameraMngr->GetPosition() + fMultiplier * -m_fMovementSpeed * glm::normalize(vector3(v3Forward.x, 0.0f, v3Forward.z));
+		m_pCameraMngr->SetPositionTargetAndUpward(
+			v3newPos,
+			v3newPos + m_pCameraMngr->GetForward(),
+			AXIS_Y
+		);
+	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		m_pCameraMngr->MoveSideways(-m_fMovementSpeed * fMultiplier);
+	{
+		vector3 v3Sideways = fMultiplier * -m_fMovementSpeed * glm::normalize(glm::cross(m_pCameraMngr->GetForward(), AXIS_Y));
+		vector3 v3newPos = m_pCameraMngr->GetPosition() + v3Sideways;
+		m_pCameraMngr->SetPositionTargetAndUpward(
+			v3newPos,
+			v3newPos + m_pCameraMngr->GetForward(),
+			AXIS_Y
+		);
+	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		m_pCameraMngr->MoveSideways(m_fMovementSpeed * fMultiplier);
+	{
+		vector3 v3Sideways = fMultiplier * m_fMovementSpeed * glm::normalize(glm::cross(m_pCameraMngr->GetForward(), AXIS_Y));
+		vector3 v3newPos = m_pCameraMngr->GetPosition() + v3Sideways;
+		m_pCameraMngr->SetPositionTargetAndUpward(
+			v3newPos,
+			v3newPos + m_pCameraMngr->GetForward(),
+			AXIS_Y
+		);
+	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-		m_pCameraMngr->MoveVertical(-m_fMovementSpeed * fMultiplier);
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+	//	m_pCameraMngr->MoveVertical(-m_fMovementSpeed * fMultiplier);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-		m_pCameraMngr->MoveVertical(m_fMovementSpeed * fMultiplier);
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	//	m_pCameraMngr->MoveVertical(m_fMovementSpeed * fMultiplier);
 #pragma endregion
 }
 //Joystick
