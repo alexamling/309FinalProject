@@ -61,6 +61,8 @@ private:
 	sf::Sound m_sound; //sound effect
 	sf::Music m_soundBGM; //background music
 
+	Model* m_pGun=nullptr;
+
 public:
 #pragma region Constructor / Run / Destructor
 	/*

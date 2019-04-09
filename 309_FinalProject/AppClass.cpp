@@ -31,10 +31,20 @@ void Application::InitVariables(void)
 	}
 	m_uOctantLevels = 3;
 	m_pRoot = new MyOctant(m_uOctantLevels, 5);
+	m_pGun = new Model();
+	m_pGun->Load("Minecraft\\revolver.fbx");
+	
 	m_pEntityMngr->Update();
+
+
 }
 void Application::Update(void)
 {
+	/*matrix4 mGun = glm::translate(m_pCameraMngr->GetForward()*1.5f)*glm::scale(vector3(0.1f));*/
+	matrix4 mGun = glm::translate(vector3(0.0f));
+	m_pGun->SetModelMatrix(mGun);
+	m_pMeshMngr->AddAxisToRenderList(mGun);
+	m_pGun->AddToRenderList();
 	//Update the system so it knows how much time has passed since the last call
 	m_pSystem->Update();
 
@@ -75,6 +85,7 @@ void Application::Display(void)
 }
 void Application::Release(void)
 {
+	SafeDelete(m_pGun);
 	delete m_pRoot;
 	m_pRoot = nullptr;
 
