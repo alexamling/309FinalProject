@@ -75,6 +75,13 @@ public:
 	void Swap(MyRigidBody& other);
 
 	/*
+	USAGE: Moves the rigid body the specified distance in global space
+	ARGUMENTS: vector 3 that will be applied to global coordinates
+	OUTPUT: ---
+	*/
+	void Move(vector3 a_v3PosChange);
+
+	/*
 	USAGE: Will render the Rigid Body at the model to world matrix
 	ARGUMENTS: ---
 	OUTPUT: ---

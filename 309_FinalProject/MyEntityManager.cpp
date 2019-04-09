@@ -4,8 +4,10 @@ using namespace Simplex;
 Simplex::MyEntityManager* Simplex::MyEntityManager::m_pInstance = nullptr;
 void Simplex::MyEntityManager::Init(void)
 {
+	// TODO: lists of types of entities [Bullets, Targets, Walls]
 	m_uEntityCount = 0;
 	m_mEntityArray = nullptr;
+	m_BulletArray = new Bullet[10];
 }
 void Simplex::MyEntityManager::Release(void)
 {
