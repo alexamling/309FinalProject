@@ -8,9 +8,10 @@ class Bullet :
 {
 public:
 	Bullet();
+	Bullet(vector3 a_v3Velocity);
 	~Bullet();
 	void Update();
 private:
-	float speed;
+	vector3 velocity;
 };
 
