@@ -42,8 +42,10 @@ void Application::Update(void)
 {
 	/*matrix4 mGun = glm::translate(m_pCameraMngr->GetForward()*1.5f)*glm::scale(vector3(0.1f));*/
 	//matrix4 orientation = m_pCameraMngr->GetViewMatrix()*vector4(m_pCameraMngr->GetForward(),1.0f);
-	matrix4 mGun = glm::translate(m_pCameraMngr->GetPosition(0)+m_pCameraMngr->GetForward()*0.75f-vector3(0.0f,0.3f,0.0f))*glm::rotate(m_pCameraMngr->GetViewMatrix(),0.0f,m_pCameraMngr->GetForward());
+	//matrix4 mGun = glm::translate(m_pCameraMngr->GetPosition(0)+m_pCameraMngr->GetForward()*0.75f-vector3(0.0f,0.3f,0.0f))*glm::rotate(m_pCameraMngr->GetViewMatrix(),0.0f,m_pCameraMngr->GetForward());
 	//matrix4 mGun = glm::rotate(m_pCameraMngr->GetViewMatrix(), 0.0f, m_pCameraMngr->GetForward());
+	//matrix4 mGun = glm::translate(m_pCameraMngr->GetViewMatrix(), m_pCameraMngr->GetForward()*5.0f);
+	matrix4 mGun = glm::translate(m_pCameraMngr->GetPosition() + m_pCameraMngr->GetForward() * 5) * matrix4(glm::transpose(matrix3(m_pCameraMngr->GetViewMatrix()))) * glm::scale(vector3(5.0f));
 	m_pGun->SetModelMatrix(mGun);
 	m_pMeshMngr->AddAxisToRenderList(mGun);
 	m_pGun->AddToRenderList();
