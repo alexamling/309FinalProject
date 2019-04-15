@@ -23,7 +23,7 @@ void Application::InitVariables(void)
 		for (int j = 0; j < nSquare; j++)
 		{
 			uIndex++;
-			m_pEntityMngr->AddEntity("Minecraft\\Cube.obj");
+			m_pEntityMngr->AddEntity("Minecraft\\Pig.obj");
 			vector3 v3Position = vector3(glm::sphericalRand(34.0f));
 			matrix4 m4Position = glm::translate(v3Position);
 			m_pEntityMngr->SetModelMatrix(m4Position);
@@ -33,6 +33,8 @@ void Application::InitVariables(void)
 	m_pRoot = new MyOctant(m_uOctantLevels, 5);
 	m_pGun = new Model();
 	m_pGun->Load("Minecraft\\revolver.fbx");
+	m_pGround = new Model();
+	m_pGround->Load("Minecraft\\ground.obj");
 	
 	m_pEntityMngr->Update();
 
@@ -44,14 +46,21 @@ void Application::Update(void)
 	//matrix4 orientation = m_pCameraMngr->GetViewMatrix()*vector4(m_pCameraMngr->GetForward(),1.0f);
 	//matrix4 mGun = glm::translate(m_pCameraMngr->GetPosition(0)+m_pCameraMngr->GetForward()*0.75f-vector3(0.0f,0.3f,0.0f))*glm::rotate(m_pCameraMngr->GetViewMatrix(),0.0f,m_pCameraMngr->GetForward());
 	//matrix4 mGun = glm::rotate(m_pCameraMngr->GetViewMatrix(), 0.0f, m_pCameraMngr->GetForward());
-	//matrix4 mGun = glm::translate(m_pCameraMngr->GetViewMatrix(), m_pCameraMngr->GetForward()*5.0f);
+	matrix4 mGround = glm::translate(vector3(0.0f, -1.0f, 0.0f));
 	vector3 v3Sideways = glm::normalize(glm::cross(m_pCameraMngr->GetForward(), AXIS_Y)); // TODO: add a player class that calculates this automatically
 	matrix4 mGun = glm::translate(m_pCameraMngr->GetPosition() + m_pCameraMngr->GetForward() * 3.0f + v3Sideways * 1.5f - AXIS_Y) * 
 		glm::rotate<float>(matrix4(glm::transpose(matrix3(m_pCameraMngr->GetViewMatrix()))), static_cast<float>(-PI/2.0f), AXIS_Y) * 
 		glm::scale(vector3(5.0f));
+
 	m_pGun->SetModelMatrix(mGun);
-	m_pMeshMngr->AddAxisToRenderList(mGun);
+	//m_pMeshMngr->AddAxisToRenderList(mGun);
 	m_pGun->AddToRenderList();
+
+
+	m_pGround->SetModelMatrix(mGround);
+	m_pMeshMngr->AddAxisToRenderList(mGround);
+	m_pGround->AddToRenderList();
+
 	//Update the system so it knows how much time has passed since the last call
 	m_pSystem->Update();
 

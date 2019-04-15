@@ -62,6 +62,7 @@ private:
 	sf::Music m_soundBGM; //background music
 
 	Model* m_pGun=nullptr;
+	Model* m_pGround = nullptr;
 
 public:
 #pragma region Constructor / Run / Destructor
