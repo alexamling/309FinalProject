@@ -31,15 +31,14 @@ void Application::InitVariables(void)
 	m_pGun->Load("Minecraft\\revolver.fbx");
 	m_pGround = new Model();
 	m_pGround->Load("Minecraft\\ground.obj");
+
+	m_pPlayer->SetGun(m_pGun);
 	
 	m_pEntityMngr->Update();
 }
 void Application::Update(void)
 {
-	
 	matrix4 mGround = glm::translate(vector3(0.0f, -1.0f, 0.0f));
-
-
 
 	m_pGround->SetModelMatrix(mGround);
 	m_pMeshMngr->AddAxisToRenderList(mGround);
