@@ -169,6 +169,9 @@ Simplex::MyEntityManager::~MyEntityManager(){Release();};
 // other methods
 void Simplex::MyEntityManager::Update(void)
 {
+	if (m_uEntityCount == 0)
+		return;
+
 	//Clear all collisions
 	for (uint i = 0; i < m_uEntityCount; i++)
 	{
