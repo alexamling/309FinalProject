@@ -326,7 +326,7 @@ public:
 		String a_sFileName -> name of the file to add
 	OUTPUT: returns the name of the mesh that will render
 	*/
-	void AddSkyboxToRenderList(String a_sFileName = "Skybox.png");
+	void AddSkyboxToRenderList(String a_sFileName = "4kWestern.jpg");
 	/*
 	USAGE: Render an axis on the specified position
 	ARGUMENTS: matrix4 a_m4ToWorld -> space on which the axis will be rendered

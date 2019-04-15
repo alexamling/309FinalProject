@@ -62,6 +62,7 @@ private:
 	sf::Sound m_sound; //sound effect
 	sf::Music m_soundBGM; //background music
 
+	Model* m_pGround = nullptr;
 	Model* m_pGun = nullptr;
 
 	Player* m_pPlayer = nullptr;

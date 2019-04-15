@@ -29,12 +29,22 @@ void Application::InitVariables(void)
 //	m_pRoot = new MyOctant(m_uOctantLevels, 5);
 	m_pGun = new Model();
 	m_pGun->Load("Minecraft\\revolver.fbx");
-	m_pPlayer->SetGun(m_pGun);
+	m_pGround = new Model();
+	m_pGround->Load("Minecraft\\ground.obj");
 	
 	m_pEntityMngr->Update();
 }
 void Application::Update(void)
 {
+	
+	matrix4 mGround = glm::translate(vector3(0.0f, -1.0f, 0.0f));
+
+
+
+	m_pGround->SetModelMatrix(mGround);
+	m_pMeshMngr->AddAxisToRenderList(mGround);
+	m_pGround->AddToRenderList();
+
 	// updates player and camera
 	m_pPlayer->Update();
 
