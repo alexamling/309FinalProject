@@ -18,7 +18,8 @@ Bullet::~Bullet()
 
 void Bullet::Update()
 {
-	if (m_bIsActive) {
+	if(m_bIsActive)
+	{
 		GetRigidBody()->Move(m_v3Velocity);
 	}
 }
