@@ -34,11 +34,12 @@ void Simplex::Player::SetGun(Model* a_pGun) { m_pGun = a_pGun; }
 
 void Simplex::Player::Update() 
 {
-	m_pCamera->SetPositionTargetAndUpward(
-		m_v3Position,
-		m_v3Position + m_pCamera->GetForward(),
-		AXIS_Y
-	);
+	if(m_pCamera != nullptr)
+		m_pCamera->SetPositionTargetAndUpward(
+			m_v3Position,
+			m_v3Position + m_pCamera->GetForward(),
+			AXIS_Y
+		);
 
 	if (m_pGun == nullptr)
 		return;
