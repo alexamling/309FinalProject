@@ -16,6 +16,6 @@ public:
 	bool IsColliding(MyEntity* other);
 private:
 	vector3 m_v3Velocity;
-	bool m_bIsActive
+	bool m_bIsActive;
 };
 
