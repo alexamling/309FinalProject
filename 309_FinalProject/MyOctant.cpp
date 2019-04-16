@@ -392,7 +392,7 @@ namespace Simplex
 			for (int i = 0; i < 8; i++) {
 				if (m_pChild[i]->IsColliding(a_RB)) {
 					std::vector<uint> temp = m_pChild[i]->GetPossibleCollisions(a_RB);
-					values.insert(values.end, temp.begin, temp.end);
+					//values.insert(values.end, temp.begin, temp.end);
 				}
 			}
 		}
