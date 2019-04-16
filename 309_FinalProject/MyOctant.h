@@ -115,6 +115,13 @@ public:
 	*/
 	bool IsColliding(uint a_uRBIndex);
 	/*
+	USAGE: Asks if there is a collision with the Entity specified by index from
+	the Bounding Object Manager
+	ARGUMENTS: - RigidBody Pointer
+	OUTPUT: check of the collision
+	*/
+	bool IsColliding(MyRigidBody* a_RB);
+	/*
 	USAGE: Displays the MyOctant volume specified by index including the objects underneath
 	ARGUMENTS:
 	- uint a_nIndex -> MyOctant to be displayed.
@@ -193,13 +200,18 @@ public:
 	OUTPUT: ---
 	*/
 	void AssignIDtoEntity(uint a_uRBIndex);
-
 	/*
 	USAGE: Gets the total number of octants in the world
 	ARGUMENTS: ---
 	OUTPUT: ---
 	*/
 	uint GetOctantCount(void);
+	/*
+	USAGE: gets the object object indexes in the dimensions of the passed in object
+	ARGUMENTS: 
+	OUTPUT: ---
+	*/
+	std::vector<uint> GetPossibleCollisions(MyRigidBody* a_RB);
 
 private:
 	/*

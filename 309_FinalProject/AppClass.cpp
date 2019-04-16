@@ -33,7 +33,7 @@ void Application::InitVariables(void)
 	m_pGun = new Model();
 	m_pGun->Load("Minecraft\\revolver.fbx");
 	m_pBullet = new Model();
-	m_pBullet->LoadFBX("Minecraft\\bullet.fbx");
+	m_pBullet->Load("Minecraft\\revolver.fbx");
 
 
 	m_pPlayer->SetGun(m_pGun);
