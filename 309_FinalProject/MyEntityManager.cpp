@@ -7,7 +7,7 @@ void Simplex::MyEntityManager::Init(void)
 	// TODO: lists of types of entities [Bullets, Targets, Walls]
 	m_uEntityCount = 0;
 	m_mEntityArray = nullptr;
-	m_BulletArray = new Bullet[10];
+	m_BulletArray = new Bullet[100];
 }
 void Simplex::MyEntityManager::Release(void)
 {
@@ -171,6 +171,11 @@ void Simplex::MyEntityManager::Update(void)
 {
 	if (m_uEntityCount == 0)
 		return;
+
+	//move all bullets
+	for (uint i = 0; i < sizeof(m_BulletArray); i++) {
+		m_BulletArray[i].Update();
+	}
 
 	//Clear all collisions
 	for (uint i = 0; i < m_uEntityCount; i++)

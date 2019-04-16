@@ -7,6 +7,8 @@ Date: 2019/04
 #define __PLAYERCLASS_H_
 
 #include "Simplex/Simplex.h"
+#include "Bullet.h"
+#include "MyEntityManager.h"
 
 namespace Simplex {
 	class Player
@@ -14,6 +16,7 @@ namespace Simplex {
 		Camera* m_pCamera = nullptr;
 		Model* m_pGun = nullptr;
 		vector3 m_v3Position;
+		MyEntityManager* m_pEntityMngr = nullptr;
 
 	public:
 		Player(Camera* a_pCamera);
@@ -28,6 +31,7 @@ namespace Simplex {
 		void SetGun(Model* a_pGun);
 		
 		void Update();
+		void Shoot();
 	private:
 		void Init();
 		void Release();
