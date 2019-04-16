@@ -5,6 +5,7 @@ using namespace Simplex;
 Player::Player(Camera* a_pCamera)
 {
 	m_pCamera = a_pCamera;
+	m_pEntityMngr = MyEntityManager::GetInstance();
 	Init();
 }
 
@@ -54,6 +55,11 @@ void Simplex::Player::Update()
 			AXIS_Y)
 	);
 	m_pGun->AddToRenderList();
+}
+
+void Simplex::Player::Shoot() 
+{
+
 }
 
 void Simplex::Player::Init()

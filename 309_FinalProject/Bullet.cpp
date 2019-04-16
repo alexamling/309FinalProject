@@ -18,5 +18,19 @@ Bullet::~Bullet()
 
 void Bullet::Update()
 {
-	GetRigidBody()->Move(velocity);
+	if (m_bIsActive) {
+		GetRigidBody()->Move(m_v3Velocity);
+	}
+}
+
+bool Bullet::IsActive() {
+	return m_bIsActive;
+}
+
+void Bullet::SetActive(bool a_bActive) {
+	m_bIsActive = a_bActive;
+}
+
+bool Bullet::IsColliding(MyEntity* other) {
+	return false;
 }

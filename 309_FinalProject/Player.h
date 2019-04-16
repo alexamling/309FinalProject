@@ -7,13 +7,16 @@ Date: 2019/04
 #define __PLAYERCLASS_H_
 
 #include "Simplex/Simplex.h"
+#include "Bullet.h"
+#include "MyEntityManager.h"
 
 namespace Simplex {
 	class Player
 	{
-		Camera* m_pCamera = nullptr; // pointer to the camera that the player uses
-		Model* m_pGun = nullptr; // pointer to the gun model to use as the viewmodel
-		vector3 m_v3Position; // position of player
+		Camera* m_pCamera = nullptr;
+		Model* m_pGun = nullptr;
+		vector3 m_v3Position;
+		MyEntityManager* m_pEntityMngr = nullptr;
 
 	public:
 		/*
@@ -77,6 +80,7 @@ namespace Simplex {
 		OUTPUT: ---
 		*/
 		void Update();
+		void Shoot();
 	private:
 		/*
 		USAGE: initializes member fields 
