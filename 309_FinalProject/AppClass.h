@@ -64,6 +64,7 @@ private:
 
 	Model* m_pGround = nullptr;
 	Model* m_pGun = nullptr;
+	Model* m_pBullet = nullptr;
 
 	Player* m_pPlayer = nullptr;
 
