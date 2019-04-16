@@ -32,6 +32,9 @@ void Simplex::Player::SetPosition(vector3 a_v3Position){ m_v3Position = a_v3Posi
 
 void Simplex::Player::SetGun(Model* a_pGun) { m_pGun = a_pGun; }
 
+void Simplex::Player::ShootGun()
+{}
+
 void Simplex::Player::Update() 
 {
 	if(m_pCamera != nullptr)

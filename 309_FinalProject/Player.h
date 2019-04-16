@@ -64,6 +64,12 @@ namespace Simplex {
 		*/
 		void SetGun(Model* a_pGun);
 		
+		/*USAGE:fires the gun
+		ARGUMENTS: ---
+		OUTPUT: ---
+		*/
+		void ShootGun();
+
 		// update methods
 		/*
 		USAGE: Updates the camera and viewmodel positions
