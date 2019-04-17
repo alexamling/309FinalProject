@@ -61,9 +61,11 @@ private:
 	sf::SoundBuffer m_soundBuffer; //buffer to play sound from
 	sf::Sound m_sound; //sound effect
 	sf::Music m_soundBGM; //background music
-
+	
+	Model* m_pBullet = nullptr;
 	Model* m_pGround = nullptr;
 	Model* m_pGun = nullptr;
+	
 
 	Player* m_pPlayer = nullptr;
 
