@@ -22,7 +22,7 @@ void Application::InitVariables(void)
 		for (int j = 0; j < nSquare; j++)
 		{
 			uIndex++;
-			m_pEntityMngr->AddEntity("Minecraft\\Cube.obj");
+			m_pEntityMngr->AddEntity("Minecraft\\Target2.fbx");
 			vector3 v3position = vector3(glm::sphericalRand(34.0f));
 			matrix4 m4position = glm::translate(v3position);
 			m_pEntityMngr->SetModelMatrix(m4position);
