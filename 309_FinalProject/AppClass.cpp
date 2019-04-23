@@ -1,4 +1,5 @@
 #include "AppClass.h"
+#include "Bullet.h";
 using namespace Simplex;
 void Application::InitVariables(void)
 {
@@ -34,18 +35,18 @@ void Application::InitVariables(void)
 	m_pGun->Load("Minecraft\\revolver.fbx");
 	m_pBullet = new Model();
 	m_pBullet->Load("Minecraft\\bullet4.fbx");
-
+	Bullet m_v3Bullet();
 
 	m_pPlayer->SetGun(m_pGun);
-	
 	m_pEntityMngr->Update();
 }
 void Application::Update(void)
 {
-	// updates player and camera
+	// updates player and camera and bullet and center ref
 	m_pPlayer->Update();
 	m_pBullet->SetModelMatrix(m_pCameraMngr->GetCameraSpaceAdjusted());
 	m_pBullet->AddToRenderList();
+	//m_v3Bullet->Update();
 	m_pMeshMngr->AddCubeToRenderList(glm::scale(vector3(200.0f, 1.0f, 200.0f))*glm::translate(vector3(0.0f, -2.0f, 0.0f)), vector3(0.96f, 0.87f, 0.70f)); // as reference for movement
 	m_pMeshMngr->AddCubeToRenderList(glm::scale(vector3(5.0f)), C_GREEN);
 

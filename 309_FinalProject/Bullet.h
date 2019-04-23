@@ -8,7 +8,6 @@ class Bullet :
 {
 public:
 	Bullet();
-	Bullet(vector3 a_v3Velocity);
 	~Bullet();
 	void Update();
 	bool IsActive();
@@ -17,5 +16,6 @@ public:
 private:
 	vector3 m_v3Velocity;
 	bool m_bIsActive;
+	vector3 m_v3Speed;
 };
 

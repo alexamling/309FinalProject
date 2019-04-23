@@ -1,15 +1,8 @@
 #include "Bullet.h"
 
-
 Bullet::Bullet() : MyEntity("data\MOBJ\Bullet.obj", "bullet") {
-	Bullet(vector3(0));
+	this->m_v3Speed = vector3(1.0f, 1.0f, 1.0f);
 }
-
-Bullet::Bullet(vector3 a_v3Velocity) : MyEntity("data\MOBJ\Bullet.obj", "bullet")
-{
-	// TODO: Set model rotation to be in-line with movement
-}
-
 
 Bullet::~Bullet()
 {
@@ -20,8 +13,7 @@ void Bullet::Update()
 {
 	if(m_bIsActive)
 	{
-		//GetRigidBody()->Move(m_v3Velocity);
-			
+		this->SetModelMatrix(glm::translate(IDENTITY_M4, m_v3Speed));
 	}
 }
 
