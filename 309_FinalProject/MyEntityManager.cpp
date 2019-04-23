@@ -7,7 +7,7 @@ void Simplex::MyEntityManager::Init(void)
 	// TODO: lists of types of entities [Bullets, Targets, Walls]
 	m_uEntityCount = 0;
 	m_mEntityArray = nullptr;
-	m_BulletArray = new Bullet[100];
+	m_BulletArray = new Bullet*[100];
 }
 void Simplex::MyEntityManager::Release(void)
 {
@@ -174,7 +174,11 @@ void Simplex::MyEntityManager::Update(void)
 
 	//move all bullets
 	for (uint i = 0; i < sizeof(m_BulletArray); i++) {
-		m_BulletArray[i].Update();
+		//m_BulletArray[i].Update();
+		m_BulletArray[i]->SetModelMatrix(glm::translate(m_BulletArray[i]->GetModelMatrix(), m_BulletArray[i]->m_v3Speed));
+			//matrix4 position = glm::translate(bulletModel->GetModelMatrix(), m_v3Speed);
+		//bulletModel->SetModelMatrix(position);
+		//bulletModel->AddToRenderList();
 	}
 
 	//Clear all collisions

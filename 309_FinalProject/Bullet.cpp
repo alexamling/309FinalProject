@@ -1,7 +1,11 @@
 #include "Bullet.h"
 
-Bullet::Bullet() : MyEntity("data\MOBJ\Bullet.obj", "bullet") {
-	this->m_v3Speed = vector3(1.0f, 1.0f, 1.0f);
+Bullet::Bullet(vector3 forward, matrix4 root) : MyEntity("Minecraft\\bullet4.fbx", "bullet") {
+	m_pCameraMngr = CameraManager::GetInstance();
+	rootPosition = root;
+	this->m_v3Speed = forward;
+	this->SetModelMatrix(root);
+	//bulletModel->Load("Minecraft\\bullet4.fbx");
 }
 
 Bullet::~Bullet()
@@ -11,10 +15,10 @@ Bullet::~Bullet()
 
 void Bullet::Update()
 {
-	if(m_bIsActive)
-	{
-		this->SetModelMatrix(glm::translate(IDENTITY_M4, m_v3Speed));
-	}
+	//if(m_bIsActive)
+	//{
+	
+	//}
 }
 
 bool Bullet::IsActive() {
