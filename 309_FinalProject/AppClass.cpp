@@ -3,6 +3,7 @@
 using namespace Simplex;
 void Application::InitVariables(void)
 {
+	Simplex::MeshManager::GetInstance();
 	m_pPlayer = new Player(m_pCameraMngr->GetCamera(-1));
 	m_pLightMngr->SetPosition(vector3(0.0f, 3.0f, 13.0f), 1); //set the position of first light (0 is reserved for ambient light)
 	m_soundBGM.openFromFile("Data/Audio/BigMarty.wav");
@@ -35,7 +36,7 @@ void Application::InitVariables(void)
 	m_pGun->Load("Minecraft\\revolver.fbx");
 	m_pBullet = new Model();
 	m_pBullet->Load("Minecraft\\bullet4.fbx");
-	Bullet m_v3Bullet();
+	m_v3Bullet = new Bullet();
 
 	m_pPlayer->SetGun(m_pGun);
 	m_pEntityMngr->Update();

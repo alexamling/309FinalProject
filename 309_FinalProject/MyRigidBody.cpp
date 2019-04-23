@@ -83,7 +83,10 @@ vector3 MyRigidBody::GetMaxGlobal(void) { return m_v3MaxG; }
 vector3 MyRigidBody::GetHalfWidth(void) { return m_v3HalfWidth; }
 matrix4 MyRigidBody::GetModelMatrix(void) { return m_m4ToWorld; }
 
-void Simplex::MyRigidBody::Move(vector3 a_v3PosChange) { m_v3CenterG += a_v3PosChange; }
+void Simplex::MyRigidBody::Move(vector3 a_v3PosChange) 
+{
+
+}
 
 void MyRigidBody::SetModelMatrix(matrix4 a_m4ModelMatrix)
 {

@@ -73,7 +73,7 @@ Simplex::MyEntity::MyEntity(String a_sFileName, String a_sUniqueID)
 		m_bInMemory = true; //mark this entity as viable
 	}
 }
-Simplex::MyEntity::MyEntity(Model * a_pModel, MyRigidBody a_pRigidBody, String a_sUniqueID)
+Simplex::MyEntity::MyEntity(Model * a_pModel, Simplex::MyRigidBody a_pRigidBody, Simplex::String a_sUniqueID)
 {
 	Init();
 	m_pModel = a_pModel;
