@@ -112,6 +112,10 @@ public:
 	OUTPUT: model to world matrix
 	*/
 	matrix4 GetModelMatrix(String a_sUniqueID);
+	
+	void AddBullet(Bullet* a_pBullet);
+
+	Bullet* GetBullet(uint a_uIndex);
 	/*
 	USAGE: Sets the model matrix associated to the entity specified in the ID
 	ARGUMENTS:

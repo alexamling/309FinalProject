@@ -211,7 +211,7 @@ public:
 	ARGUMENTS: 
 	OUTPUT: ---
 	*/
-	std::vector<uint> GetPossibleCollisions(MyRigidBody* a_RB);
+	std::vector<uint> GetPossibleCollisions(uint a_uRBIndex);
 
 private:
 	/*
