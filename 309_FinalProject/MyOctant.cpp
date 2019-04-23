@@ -381,7 +381,7 @@ namespace Simplex
 	{
 	}
 
-	std::vector<uint> Simplex::MyOctant::GetPossibleCollisions(MyRigidBody* a_RB)
+	std::vector<uint> Simplex::MyOctant::GetPossibleCollisions(uint a_uRBIndex)
 	{
 		std::vector<uint> values;
 
@@ -391,11 +391,12 @@ namespace Simplex
 		}
 		else {
 			for (int i = 0; i < 8; i++) {
-				if (m_pChild[i]->IsColliding(a_RB)) {
-					std::vector<uint> temp = m_pChild[i]->GetPossibleCollisions(a_RB);
+				if (m_pChild[i]->IsColliding(m_pEntityMngr->GetBullet(a_uRBIndex)->GetRigidBody())) {
+					std::vector<uint> temp = m_pChild[i]->GetPossibleCollisions(a_uRBIndex);
 					values.insert(values.end(), temp.begin(), temp.end());
 				}
 			}
 		}
+		return values;
 	}
 }

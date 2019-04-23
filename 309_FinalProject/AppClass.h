@@ -13,6 +13,7 @@ Date: 2019/06
 #include "MyEntityManager.h"
 #include "MyOctant.h"
 #include "Player.h"
+#include "Bullet.h"
 
 namespace Simplex
 {

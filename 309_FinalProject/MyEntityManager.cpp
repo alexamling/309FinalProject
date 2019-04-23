@@ -117,6 +117,14 @@ Simplex::matrix4 Simplex::MyEntityManager::GetModelMatrix(String a_sUniqueID)
 	}
 	return IDENTITY_M4;
 }
+void Simplex::MyEntityManager::AddBullet(Bullet * a_pBullet)
+{
+	// TODO
+}
+Bullet * Simplex::MyEntityManager::GetBullet(uint a_uIndex)
+{
+	return nullptr; //TODO
+}
 void Simplex::MyEntityManager::SetModelMatrix(matrix4 a_m4ToWorld, String a_sUniqueID)
 {
 	//Get the entity
@@ -184,11 +192,22 @@ void Simplex::MyEntityManager::Update(void)
 	}
 
 	//check collisions
+	/*
 	for (uint i = 0; i < m_uEntityCount - 1; i++)
 	{
 		for (uint j = i + 1; j < m_uEntityCount; j++)
 		{
 			m_mEntityArray[i]->IsColliding(m_mEntityArray[j]);
+		}
+	}
+	*/
+
+	// check bullets against targets
+
+	for (uint i = 0; i < sizeof(m_BulletArray); i++) {
+		//std::vector<uint> dimensions = m_pOctRoot->GetPossibleCollisions(m_BulletArray[i].GetRigidBody);
+		for (uint j = 0; j < m_uEntityCount; j++) {
+
 		}
 	}
 }
