@@ -9,27 +9,27 @@ void Application::InitVariables(void)
 	m_soundBGM.play();
 	
 
-//#ifdef DEBUG
-//	uint uInstances = 900;
-//#else
-//	uint uInstances = 1849;
-//#endif
-//	int nSquare = static_cast<int>(std::sqrt(uInstances));
-//	m_uObjects = nSquare * nSquare;
-//	uint uIndex = -1;
-//	for (int i = 0; i < nSquare; i++)
-//	{
-//		for (int j = 0; j < nSquare; j++)
-//		{
-//			uIndex++;
-//			m_pEntityMngr->AddEntity("Minecraft\\Cube.obj");
-//			vector3 v3Position = vector3(glm::sphericalRand(34.0f));
-//			matrix4 m4Position = glm::translate(v3Position);
-//			m_pEntityMngr->SetModelMatrix(m4Position);
-//		}
-//	}
-//	m_uOctantLevels = 3;
-//	m_pRoot = new MyOctant(m_uOctantLevels, 5);
+#ifdef DEBUG
+	uint uInstances = 900;
+#else
+	uint uInstances = 1849;
+#endif
+	int nSquare = static_cast<int>(std::sqrt(uInstances));
+	m_uObjects = nSquare * nSquare;
+	uint uIndex = -1;
+	for (int i = 0; i < nSquare; i++)
+	{
+		for (int j = 0; j < nSquare; j++)
+		{
+			uIndex++;
+			m_pEntityMngr->AddEntity("Minecraft\\Cube.obj");
+			vector3 v3position = vector3(glm::sphericalRand(34.0f));
+			matrix4 m4position = glm::translate(v3position);
+			m_pEntityMngr->SetModelMatrix(m4position);
+		}
+	}
+	m_uOctantLevels = 3;
+	m_pRoot = new MyOctant(m_uOctantLevels, 5);
 	m_pGun = new Model();
 	m_pGun->Load("Minecraft\\revolver.fbx");
 	m_pBullet = new Model();
@@ -70,7 +70,7 @@ void Application::Display(void)
 	ClearScreen();
 
 	//display octree
-	//m_pRoot->Display();
+	m_pRoot->Display(Simplex::vector3(1.0, 0, 0));
 	
 	// draw a skybox
 	m_pMeshMngr->AddSkyboxToRenderList();
@@ -90,8 +90,8 @@ void Application::Display(void)
 void Application::Release(void)
 {
 	SafeDelete(m_pGun);
-	//delete m_pRoot;
-	//m_pRoot = nullptr;
+	delete m_pRoot;
+	m_pRoot = nullptr;
 
 	//release GUI
 	ShutdownGUI();
