@@ -42,7 +42,7 @@ void Application::InitVariables(void)
 
 	std::vector<uint> temp = m_pRoot->GetPossibleCollisions(m_pEntityMngr->GetRigidBody(-1));
 
-	std::cout << temp[0];
+	//std::cout << temp[0];
 }
 void Application::Update(void)
 {
