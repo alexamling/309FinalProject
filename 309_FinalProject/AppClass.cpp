@@ -39,6 +39,10 @@ void Application::InitVariables(void)
 	m_pPlayer->SetGun(m_pGun);
 	
 	m_pEntityMngr->Update();
+
+	std::vector<uint> temp = m_pRoot->GetPossibleCollisions(m_pEntityMngr->GetRigidBody(-1));
+
+	std::cout << temp[0];
 }
 void Application::Update(void)
 {
