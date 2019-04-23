@@ -175,9 +175,39 @@ namespace Simplex
 		return colliding;
 	}
 
+	bool Simplex::MyOctant::IsColliding(MyRigidBody* a_RB)
+	{
+
+		bool colliding = true;
+
+		vector3 otherMin = a_RB->GetMinGlobal();
+		vector3 otherMax = a_RB->GetMaxGlobal();
+
+		if (otherMin.x > m_v3Center.x + (m_fSize * 0.5f))
+			colliding = false;
+
+		if (otherMax.x < m_v3Center.x - (m_fSize * 0.5f))
+			colliding = false;
+
+		if (otherMin.y > m_v3Center.y + (m_fSize * 0.5f))
+			colliding = false;
+
+		if (otherMax.y < m_v3Center.y - (m_fSize * 0.5f))
+			colliding = false;
+
+		if (otherMin.z > m_v3Center.z + (m_fSize * 0.5f))
+			colliding = false;
+
+		if (otherMax.z < m_v3Center.z - (m_fSize * 0.5f))
+			colliding = false;
+
+		return colliding;
+	}
+
 	void Simplex::MyOctant::AddToLeaves(uint a_uRBIndex) {
 		if (IsLeaf()) {
 			AssignIDtoEntity(a_uRBIndex);
+			m_EntityList.push_back(a_uRBIndex);
 		}
 		else {
 			for (int i = 0; i < 8; i++) {
@@ -349,5 +379,22 @@ namespace Simplex
 
 	void Simplex::MyOctant::ConstructList(void)
 	{
+	}
+
+	std::vector<uint> Simplex::MyOctant::GetPossibleCollisions(MyRigidBody* a_RB)
+	{
+		std::vector<uint> values;
+
+		if (IsLeaf()) {
+			return values;
+		}
+		else {
+			for (int i = 0; i < 8; i++) {
+				if (m_pChild[i]->IsColliding(a_RB)) {
+					std::vector<uint> temp = m_pChild[i]->GetPossibleCollisions(a_RB);
+					//values.insert(values.end, temp.begin, temp.end);
+				}
+			}
+		}
 	}
 }

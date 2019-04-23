@@ -64,7 +64,7 @@ void Simplex::Player::Shoot()
 
 void Simplex::Player::Init()
 {
-	m_v3Position = vector3(0.0f, 0.0f, 100.0f);
+	m_v3Position = vector3(0.0f, 0.0f, 0.0f);
 
 	//Set the position and target of the camera
 	m_pCamera->SetPositionTargetAndUpward(
