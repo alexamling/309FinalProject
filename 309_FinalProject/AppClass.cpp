@@ -11,7 +11,7 @@ void Application::InitVariables(void)
 	
 
 #ifdef DEBUG
-	uint uInstances = 900;
+	uint uInstances = 100;
 #else
 	uint uInstances = 1849;
 #endif
@@ -42,7 +42,6 @@ void Application::InitVariables(void)
 	m_pTarget->SetModelMatrix(glm::translate(vector3(0, 0, 20)));
 
 	m_pPlayer->SetGun(m_pGun);
-	m_pEntityMngr->Update();
 }
 void Application::Update(void)
 {
@@ -68,7 +67,9 @@ void Application::Update(void)
 	CameraRotation();
 	
 	//Update Entity Manager
-	m_pEntityMngr->Update();
+	m_pEntityMngr->UpdateBullets();
+	m_pRoot->UpdateBulletDimensions();
+	m_pEntityMngr->UpdateCollisions();
 
 	//Add objects to render list
 	m_pEntityMngr->AddEntityToRenderList(-1, true);

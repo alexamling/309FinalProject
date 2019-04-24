@@ -212,6 +212,12 @@ public:
 	OUTPUT: ---
 	*/
 	std::vector<uint> GetPossibleCollisions(uint a_uRBIndex);
+	/*
+	USAGE: gets the object object indexes in the dimensions of the passed in object
+	ARGUMENTS:
+	OUTPUT: ---
+	*/
+	void UpdateBulletDimensions();
 
 private:
 	/*

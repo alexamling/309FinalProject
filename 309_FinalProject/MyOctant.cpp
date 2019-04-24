@@ -381,6 +381,18 @@ namespace Simplex
 	{
 	}
 
+	void Simplex::MyOctant::UpdateBulletDimensions() {
+		for (uint i = 0; i < m_pEntityMngr->GetBulletCount(); i++) {
+			m_pEntityMngr->GetBullet(i)->ClearDimensionSet();
+			
+			std::vector<uint> dimensions = GetPossibleCollisions(i);
+
+			for (uint d = 0; d < dimensions.size() ; d++) {
+				m_pEntityMngr->GetBullet(i)->AddDimension(dimensions[d]);
+			}
+		}
+	}
+
 	std::vector<uint> Simplex::MyOctant::GetPossibleCollisions(uint a_uRBIndex)
 	{
 		std::vector<uint> values;

@@ -12,7 +12,7 @@ public:
 	void Update();
 	bool IsActive();
 	void SetActive(bool a_bActive);
-	bool IsColliding(MyEntity* other);
+
 
 	matrix4 rootPosition;
 	vector3 m_v3Speed;

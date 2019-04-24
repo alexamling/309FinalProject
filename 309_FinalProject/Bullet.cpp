@@ -26,7 +26,3 @@ bool Bullet::IsActive() {
 void Bullet::SetActive(bool a_bActive) {
 	m_bIsActive = a_bActive;
 }
-
-bool Bullet::IsColliding(MyEntity* other) {
-	return false;
-}

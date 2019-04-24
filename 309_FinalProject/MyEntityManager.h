@@ -17,6 +17,7 @@ class MyEntityManager
 {
 	typedef MyEntity* PEntity; //MyEntity Pointer
 	uint m_uEntityCount = 0; //number of elements in the list
+	uint m_uBulletCount = 0; //number of bullets in the scene
 	PEntity* m_mEntityArray = nullptr; //array of MyEntity pointers
 	std::vector<Bullet*> m_BulletArray = std::vector<Bullet*>();
 	static MyEntityManager* m_pInstance; // Singleton pointer
@@ -79,11 +80,17 @@ public:
 	*/
 	MyEntity* GetEntity(uint a_uIndex = -1);
 	/*
+	USAGE: Will update the bullet positions
+	ARGUMENTS: ---
+	OUTPUT: ---
+	*/
+	void UpdateBullets(void);
+	/*
 	USAGE: Will update the MyEntity manager
 	ARGUMENTS: ---
 	OUTPUT: ---
 	*/
-	void Update(void);
+	void UpdateCollisions(void);
 	/*
 	USAGE: Gets the model associated with this entity
 	ARGUMENTS: uint a_uIndex = -1 -> index in the list of entities; if less than 0 it will add it to the last in the list
@@ -260,6 +267,12 @@ public:
 	OUTPUT: MyEntity count
 	*/
 	uint GetEntityCount(void);
+	/*
+	USAGE: Will return the count of Bullets in the system
+	ARGUMENTS: ---
+	OUTPUT: MyEntity count
+	*/
+	uint GetBulletCount(void);
 private:
 	/*
 	Usage: constructor
