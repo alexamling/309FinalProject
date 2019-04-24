@@ -22,10 +22,13 @@ void Application::ProcessMousePressed(sf::Event a_event)
 		m_soundBuffer.loadFromFile("Data/Audio/gunshot1.wav");
 		m_sound.setBuffer(m_soundBuffer);
 		m_sound.play();
+		m_v3Bullet = new Bullet(m_pCameraMngr->GetForward(), m_pCameraMngr->GetCameraSpaceAdjusted());
+		m_pEntityMngr->AddBullet(m_v3Bullet);
 		break;
 	case sf::Mouse::Button::Middle:
 		gui.m_bMousePressed[1] = true;
 		m_bArcBall = true;
+		m_pPlayer->Ironsights();
 		break;
 	case sf::Mouse::Button::Right:
 		gui.m_bMousePressed[2] = true;

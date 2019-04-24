@@ -7,6 +7,7 @@ Date: 2017/07
 
 #include "MyEntity.h"
 #include "Bullet.h"
+#include <vector>
 
 namespace Simplex
 {
@@ -17,7 +18,7 @@ class MyEntityManager
 	typedef MyEntity* PEntity; //MyEntity Pointer
 	uint m_uEntityCount = 0; //number of elements in the list
 	PEntity* m_mEntityArray = nullptr; //array of MyEntity pointers
-	Bullet** m_BulletArray = nullptr;
+	std::vector<Bullet*> m_BulletArray = std::vector<Bullet*>();
 	static MyEntityManager* m_pInstance; // Singleton pointer
 public:
 	/*

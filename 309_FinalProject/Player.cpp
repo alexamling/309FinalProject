@@ -47,19 +47,32 @@ void Simplex::Player::Update()
 
 	if (m_pGun == nullptr)
 		return;
-
-	m_pGun->SetModelMatrix(
-		glm::rotate(
-			glm::translate(m_pCamera->GetCameraSpaceAdjusted(), vector3(0.5f, -0.25f, 0.25f)),
-			static_cast<float>(-PI / 2.0f),
-			AXIS_Y)
-	);
+	if (sighted == false) {
+		m_pGun->SetModelMatrix(
+			glm::rotate(
+				glm::translate(m_pCamera->GetCameraSpaceAdjusted(), vector3(0.5f, -0.25f, 0.25f)),
+				static_cast<float>(-PI / 2.0f),
+				AXIS_Y)
+		);
+	}
+	if (sighted == true) {
+		m_pGun->SetModelMatrix(
+			glm::rotate(
+				glm::translate(m_pCamera->GetCameraSpaceAdjusted(), vector3(0.0f, -0.1f, 0.25f)),
+				static_cast<float>(-PI / 2.0f),
+				AXIS_Y)
+		);
+	}
 	m_pGun->AddToRenderList();
 }
 
 void Simplex::Player::Shoot() 
 {
 
+}
+
+void Simplex::Player::Ironsights() {
+	sighted = !sighted;
 }
 
 void Simplex::Player::Init()

@@ -2,8 +2,8 @@
 
 Bullet::Bullet(vector3 forward, matrix4 root) : MyEntity("Minecraft\\bullet4.fbx", "bullet") {
 	m_pCameraMngr = CameraManager::GetInstance();
-	rootPosition = root;
-	this->m_v3Speed = forward;
+	rootPosition = glm::translate(root, vector3(0.5f, -0.25f, 0.25f));
+	this->m_v3Speed = forward*m_fSpeed;
 	this->SetModelMatrix(root);
 	//bulletModel->Load("Minecraft\\bullet4.fbx");
 }
