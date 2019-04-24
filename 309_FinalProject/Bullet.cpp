@@ -5,6 +5,7 @@ Bullet::Bullet(vector3 offset, matrix4 root) : MyEntity("Minecraft\\bullet4.fbx"
 	rootPosition = glm::translate(root, offset);
 	this->m_v3Speed = vector3(-0.0f, 0.0f, -0.1f);
 	this->SetModelMatrix(rootPosition);
+	//m_pRigidbody = new MyRigidBody(this->GetModel()->GetVertexList());
 	//bulletModel->Load("Minecraft\\bullet4.fbx");
 }
 
@@ -15,10 +16,7 @@ Bullet::~Bullet()
 
 void Bullet::Update()
 {
-	//if(m_bIsActive)
-	//{
-	
-	//}
+	//m_pRigidbody->SetModelMatrix(this->GetModelMatrix());
 }
 
 bool Bullet::IsActive() {

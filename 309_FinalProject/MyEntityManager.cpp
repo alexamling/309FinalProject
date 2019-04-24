@@ -186,9 +186,10 @@ void Simplex::MyEntityManager::Update(void)
 
 	//move all bullets
 	for (uint i = 0; i < m_BulletArray.size(); i++) {
-		//m_BulletArray[i].Update();
+		m_BulletArray[i]->Update();
 		m_BulletArray[i]->SetModelMatrix(glm::translate(m_BulletArray[i]->GetModelMatrix(), m_BulletArray[i]->m_v3Speed));
 		m_BulletArray[i]->AddToRenderList();
+		//m_BulletArray[i]->GetRigidBody();
 	}
 
 	//Clear all collisions

@@ -24,7 +24,7 @@ void Application::InitVariables(void)
 		{
 			uIndex++;
 			m_pEntityMngr->AddEntity(new Target());
-			vector3 v3position = vector3(glm::sphericalRand(34.0f));
+			vector3 v3position = vector3(glm::ballRand(25.0f));
 			matrix4 m4position = glm::translate(v3position);
 			m_pEntityMngr->SetModelMatrix(m4position);
 		}
