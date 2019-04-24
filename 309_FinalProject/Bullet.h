@@ -7,7 +7,7 @@ class Bullet :
 	public MyEntity
 {
 public:
-	Bullet(vector3 forward, matrix4 root);
+	Bullet(vector3 offset, matrix4 root);
 	~Bullet();
 	void Update();
 	bool IsActive();

@@ -22,7 +22,12 @@ void Application::ProcessMousePressed(sf::Event a_event)
 		m_soundBuffer.loadFromFile("Data/Audio/gunshot1.wav");
 		m_sound.setBuffer(m_soundBuffer);
 		m_sound.play();
-		m_v3Bullet = new Bullet(m_pCameraMngr->GetForward(), m_pCameraMngr->GetCameraSpaceAdjusted());
+		if (m_pPlayer->IsSighted()) {
+			m_v3Bullet = new Bullet(vector3(0.0f, -0.05f, 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
+		}
+		else if (!m_pPlayer->IsSighted()) {
+			m_v3Bullet = new Bullet(vector3(0.5f, -0.20f, 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
+		}
 		m_pEntityMngr->AddBullet(m_v3Bullet);
 		break;
 	case sf::Mouse::Button::Middle:

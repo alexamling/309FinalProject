@@ -36,7 +36,7 @@ void Application::InitVariables(void)
 	m_pGun->Load("Minecraft\\revolver.fbx");
 	//m_pBullet = new Model();
 	//m_pBullet->Load("Minecraft\\bullet4.fbx");
-	m_v3Bullet = new Bullet(m_pCameraMngr->GetCamera(-1)->GetForward(),m_pCameraMngr->GetCamera(-1)->GetCameraSpace());
+	m_v3Bullet = new Bullet(m_pCameraMngr->GetCamera(-1)->GetForward(),m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
 	m_pEntityMngr->AddBullet(m_v3Bullet);
 
 	m_pPlayer->SetGun(m_pGun);

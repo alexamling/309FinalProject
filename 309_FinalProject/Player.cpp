@@ -71,6 +71,10 @@ void Simplex::Player::Shoot()
 
 }
 
+bool Simplex::Player::IsSighted() {
+	return sighted;
+}
+
 void Simplex::Player::Ironsights() {
 	sighted = !sighted;
 }

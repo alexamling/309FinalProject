@@ -189,9 +189,6 @@ void Simplex::MyEntityManager::Update(void)
 		//m_BulletArray[i].Update();
 		m_BulletArray[i]->SetModelMatrix(glm::translate(m_BulletArray[i]->GetModelMatrix(), m_BulletArray[i]->m_v3Speed));
 		m_BulletArray[i]->AddToRenderList();
-			//matrix4 position = glm::translate(bulletModel->GetModelMatrix(), m_v3Speed);
-		//bulletModel->SetModelMatrix(position);
-		//bulletModel->AddToRenderList();
 	}
 
 	//Clear all collisions

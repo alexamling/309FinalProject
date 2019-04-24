@@ -67,9 +67,28 @@ namespace Simplex {
 		OUTPUT: ---
 		*/
 		void SetGun(Model* a_pGun);
+
+		/*
+		USAGE: Sets the gun entity to use for the player viewmodel
+		ARGUMENTS: a_pGun -> pointer to a model (of a gun)
+		OUTPUT: ---
+		*/
+		void SetGun(MyEntity* a_pGun);
 		
+
+		/*
+		USAGE: Toggles the boolean that controls ironsights
+		ARGUMENTS: ---
+		OUTPUT: ---
+		*/
 		void Ironsights();
 
+		/*
+		USAGE: Returns whether or not the gun is sighted
+		ARGUMENTS: ---
+		OUTPUT: bool sighted
+		*/
+		bool IsSighted();
 
 		/*USAGE:fires the gun
 		ARGUMENTS: ---
