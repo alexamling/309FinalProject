@@ -248,6 +248,32 @@ void Simplex::MyEntityManager::AddEntity(String a_sFileName, String a_sUniqueID)
 		++m_uEntityCount;
 	}
 }
+void Simplex::MyEntityManager::AddEntity(MyEntity* a_pEntity)
+{
+	// add pre-existing entity to manager
+	if (a_pEntity->IsInitialized())
+	{
+		//create a new temp array with one extra entry
+		PEntity* tempArray = new PEntity[m_uEntityCount + 1];
+		//start from 0 to the current count
+		uint uCount = 0;
+		for (uint i = 0; i < m_uEntityCount; ++i)
+		{
+			tempArray[uCount] = m_mEntityArray[i];
+			++uCount;
+		}
+		tempArray[uCount] = a_pEntity;
+		//if there was an older array delete
+		if (m_mEntityArray)
+		{
+			delete[] m_mEntityArray;
+		}
+		//make the member pointer the temp pointer
+		m_mEntityArray = tempArray;
+		//add one entity to the count
+		++m_uEntityCount;
+	}
+}
 void Simplex::MyEntityManager::RemoveEntity(uint a_uIndex)
 {
 	//if the list is empty return

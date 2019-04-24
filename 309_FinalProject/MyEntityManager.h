@@ -48,6 +48,13 @@ public:
 	*/
 	void AddEntity(String a_sFileName, String a_sUniqueID = "NA");
 	/*
+	USAGE: Will add a pre-existing entity to the list
+	ARGUMENTS:
+	-	MyEntity* a_pEntity -> Pointer to the entity to add
+	OUTPUT: ---
+	*/
+	void AddEntity(MyEntity* a_pEntity);
+	/*
 	USAGE: Deletes the MyEntity Specified by unique ID and removes it from the list
 	ARGUMENTS: uint a_uIndex -> index of the queried entry, if < 0 asks for the last one added
 	OUTPUT: ---
