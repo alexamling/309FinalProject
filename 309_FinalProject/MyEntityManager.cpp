@@ -7,7 +7,6 @@ void Simplex::MyEntityManager::Init(void)
 	// TODO: lists of types of entities [Bullets, Targets, Walls]
 	m_uEntityCount = 0;
 	m_mEntityArray = nullptr;
-	m_BulletArray = new Bullet[100];
 }
 void Simplex::MyEntityManager::Release(void)
 {
@@ -117,6 +116,19 @@ Simplex::matrix4 Simplex::MyEntityManager::GetModelMatrix(String a_sUniqueID)
 	}
 	return IDENTITY_M4;
 }
+void Simplex::MyEntityManager::AddBullet(Bullet * a_pBullet)
+{
+	// TODO
+	m_BulletArray.push_back(a_pBullet);
+
+}
+Bullet * Simplex::MyEntityManager::GetBullet(uint a_uIndex)
+{
+	if (m_BulletArray.size() > a_uIndex) {
+		return m_BulletArray[a_uIndex];
+	}
+	return nullptr; //TODO
+}
 void Simplex::MyEntityManager::SetModelMatrix(matrix4 a_m4ToWorld, String a_sUniqueID)
 {
 	//Get the entity
@@ -173,8 +185,13 @@ void Simplex::MyEntityManager::Update(void)
 		return;
 
 	//move all bullets
-	for (uint i = 0; i < sizeof(m_BulletArray); i++) {
-		m_BulletArray[i].Update();
+	for (uint i = 0; i < m_BulletArray.size(); i++) {
+		//m_BulletArray[i].Update();
+		m_BulletArray[i]->SetModelMatrix(glm::translate(m_BulletArray[i]->GetModelMatrix(), m_BulletArray[i]->m_v3Speed));
+		m_BulletArray[i]->AddToRenderList();
+			//matrix4 position = glm::translate(bulletModel->GetModelMatrix(), m_v3Speed);
+		//bulletModel->SetModelMatrix(position);
+		//bulletModel->AddToRenderList();
 	}
 
 	//Clear all collisions
@@ -184,11 +201,22 @@ void Simplex::MyEntityManager::Update(void)
 	}
 
 	//check collisions
+	/*
 	for (uint i = 0; i < m_uEntityCount - 1; i++)
 	{
 		for (uint j = i + 1; j < m_uEntityCount; j++)
 		{
 			m_mEntityArray[i]->IsColliding(m_mEntityArray[j]);
+		}
+	}
+	*/
+
+	// check bullets against targets
+
+	for (uint i = 0; i < sizeof(m_BulletArray); i++) {
+		//std::vector<uint> dimensions = m_pOctRoot->GetPossibleCollisions(m_BulletArray[i].GetRigidBody);
+		for (uint j = 0; j < m_uEntityCount; j++) {
+
 		}
 	}
 }

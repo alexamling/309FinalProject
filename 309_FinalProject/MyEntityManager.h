@@ -7,6 +7,7 @@ Date: 2017/07
 
 #include "MyEntity.h"
 #include "Bullet.h"
+#include <vector>
 
 namespace Simplex
 {
@@ -17,7 +18,7 @@ class MyEntityManager
 	typedef MyEntity* PEntity; //MyEntity Pointer
 	uint m_uEntityCount = 0; //number of elements in the list
 	PEntity* m_mEntityArray = nullptr; //array of MyEntity pointers
-	Bullet* m_BulletArray = nullptr;
+	std::vector<Bullet*> m_BulletArray = std::vector<Bullet*>();
 	static MyEntityManager* m_pInstance; // Singleton pointer
 public:
 	/*
@@ -112,6 +113,10 @@ public:
 	OUTPUT: model to world matrix
 	*/
 	matrix4 GetModelMatrix(String a_sUniqueID);
+	
+	void AddBullet(Bullet* a_pBullet);
+
+	Bullet* GetBullet(uint a_uIndex);
 	/*
 	USAGE: Sets the model matrix associated to the entity specified in the ID
 	ARGUMENTS:

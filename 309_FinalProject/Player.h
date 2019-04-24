@@ -17,6 +17,7 @@ namespace Simplex {
 		Model* m_pGun = nullptr;
 		vector3 m_v3Position;
 		MyEntityManager* m_pEntityMngr = nullptr;
+		bool sighted = false;
 
 	public:
 		/*
@@ -67,6 +68,9 @@ namespace Simplex {
 		*/
 		void SetGun(Model* a_pGun);
 		
+		void Ironsights();
+
+
 		/*USAGE:fires the gun
 		ARGUMENTS: ---
 		OUTPUT: ---
