@@ -10,20 +10,24 @@ Date: 2019/04
 #include "Bullet.h"
 #include "MyEntityManager.h"
 
+#define MAX_TIME 20.0f
+
 namespace Simplex
 {
 
-class Target : virtual public MyEntity
+class Target : public MyEntity
 {
-	//MyRigidBody* m_pTargetRB;
+private:
+	static float Target::m_fTimer;
+	static float Target::m_fDeltaTime;
 
 public:
 	Target();
 	~Target();
 
-//private:
-//	void Init();
-//	void Release();
+	static void UpdateTimer(float a_fDeltaTime);
+	void Rotate();
+
 };
 
 }

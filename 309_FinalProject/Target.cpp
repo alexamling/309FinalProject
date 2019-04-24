@@ -2,6 +2,9 @@
 
 using namespace Simplex;
 
+float Target::m_fTimer = 0.0f;
+float Target::m_fDeltaTime = 0.0f;
+
 Target::Target() : MyEntity("Minecraft\\Target2.fbx", "target")
 {
 	// get a copy of the point list of the model
@@ -20,18 +23,35 @@ Target::Target() : MyEntity("Minecraft\\Target2.fbx", "target")
 	// set rigid body to be made out of the new list of points
 	MyRigidBody* pRigidBody = GetRigidBody();
 	*pRigidBody = MyRigidBody(lPointList);
-	//m_pTargetRB = pRigidBody;
 }
 
-//void Simplex::Target::Init() {}
-//
-//// usually neither of these methods will run, but they're not necessary
+
 Target::~Target()
 { 
-	//Release(); 
 }
 
-//void Simplex::Target::Release()
-//{
-//	//m_pTargetRB = nullptr;
-//}
+void Target::UpdateTimer(float a_fDeltaTime) 
+{
+	if (m_fTimer >= MAX_TIME)
+	{
+		m_fDeltaTime = 0.0f;
+		return;
+	}
+
+	m_fTimer += a_fDeltaTime;
+
+	if (m_fTimer >= MAX_TIME)
+		m_fDeltaTime = a_fDeltaTime - (m_fTimer - MAX_TIME);
+	else
+		m_fDeltaTime = a_fDeltaTime;
+}
+
+void Target::Rotate() 
+{
+	//float fTime = glm::clamp(m_fTimer / 20.0f, 0.0f, 1.0f);
+	//float fAngle = 0.0f * fTime + (-PI / 2.0f) * (1.0f - fTime);
+	float fAngSpeed = (-PI / 2.0f) / MAX_TIME;
+	float fDeltaAngle = fAngSpeed * m_fDeltaTime;
+	SetModelMatrix(glm::rotate(GetModelMatrix(), fDeltaAngle, AXIS_X));
+}
+
