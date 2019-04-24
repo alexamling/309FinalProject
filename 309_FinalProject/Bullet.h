@@ -22,6 +22,6 @@ private:
 	MyRigidBody* m_pRigidbody = nullptr;
 	vector3 m_v3Velocity;
 	bool m_bIsActive=true;
-	const float m_fSpeed = -0.2f;
+	const float m_fSpeed = -0.15f;
 };
 
