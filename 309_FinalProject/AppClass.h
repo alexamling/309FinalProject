@@ -13,6 +13,8 @@ Date: 2019/06
 #include "MyEntityManager.h"
 #include "MyOctant.h"
 #include "Player.h"
+#include "Target.h"
+#include "Bullet.h";
 
 namespace Simplex
 {
@@ -65,10 +67,10 @@ private:
 	
 	Model* m_pBullet = nullptr;
 	Model* m_pGround = nullptr;
-	Model* m_pGun = nullptr;
-	
+	Model* m_pGun = nullptr;	
 
 	Player* m_pPlayer = nullptr;
+	Target* m_pTarget = nullptr;
 
 public:
 #pragma region Constructor / Run / Destructor

@@ -13,12 +13,17 @@ Date: 2019/04
 namespace Simplex
 {
 
-class Target
+class Target : virtual public MyEntity
 {
+	//MyRigidBody* m_pTargetRB;
 
 public:
 	Target();
 	~Target();
+
+//private:
+//	void Init();
+//	void Release();
 };
 
 }
