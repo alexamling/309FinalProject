@@ -73,22 +73,23 @@ Simplex::MyEntity::MyEntity(String a_sFileName, String a_sUniqueID)
 		m_bInMemory = true; //mark this entity as viable
 	}
 }
-Simplex::MyEntity::MyEntity(Model * a_pModel, Simplex::MyRigidBody a_pRigidBody, Simplex::String a_sUniqueID)
-{
-	Init();
-	m_pModel = a_pModel;
-	//if the model is loaded
-	if (m_pModel->GetName() != "")
-	{
-		GenUniqueID(a_sUniqueID);
-		m_sUniqueID = a_sUniqueID;
-		m_IDMap[a_sUniqueID] = this;
-		m_pRigidBody = new MyRigidBody(m_pModel->GetVertexList()); //generate a rigid body
-		m_bInMemory = true; //mark this entity as viable
-	}
-
-
-}
+//Simplex::MyEntity::MyEntity(String a_sFileName, Simplex::MyRigidBody a_pRigidBody, Simplex::String a_sUniqueID)
+//{
+//	Init();
+//	m_pModel = new Model();
+//	m_pModel->Load(a_sFileName);
+//	//if the model is loaded
+//	if (m_pModel->GetName() != "")
+//	{
+//		GenUniqueID(a_sUniqueID);
+//		m_sUniqueID = a_sUniqueID;
+//		m_IDMap[a_sUniqueID] = this;
+//		m_pRigidBody = new MyRigidBody(m_pModel->GetVertexList()); //generate a rigid body
+//		m_bInMemory = true; //mark this entity as viable
+//	}
+//
+//
+//}
 Simplex::MyEntity::MyEntity(MyEntity const& other)
 {
 	m_bInMemory = other.m_bInMemory;

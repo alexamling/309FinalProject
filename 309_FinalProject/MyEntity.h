@@ -37,15 +37,15 @@ public:
 	Output: class object instance
 	*/
 	MyEntity(String a_sFileName, String a_sUniqueID = "NA");
-	/*
-	Usage: Constructor that specifies the name attached to the MyEntity
-	Arguments:
-	-	Model* a_pModel -> Pointer to model
-	-	MyRigidBody* a_pRigidBody -> pointer to rigidbody
-	-	String a_sUniqueID -> Name wanted as identifier, if not available will generate one
-	Output: class object instance
-	*/
-	MyEntity(Model* a_pModel, MyRigidBody a_pRigidBody, String a_sUniqueID = "NA");
+	///*
+	//Usage: Constructor that specifies the name attached to the MyEntity
+	//Arguments:
+	//-	String a_sFileName -> Name of the model to load
+	//-	MyRigidBody* a_pRigidBody -> pointer to rigidbody
+	//-	String a_sUniqueID -> Name wanted as identifier, if not available will generate one
+	//Output: class object instance
+	//*/
+	//MyEntity(String a_sFileName, MyRigidBody a_pRigidBody, String a_sUniqueID = "NA");
 	/*
 	Usage: Copy Constructor
 	Arguments: class object to copy
