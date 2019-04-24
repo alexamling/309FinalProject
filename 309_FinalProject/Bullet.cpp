@@ -3,7 +3,7 @@
 Bullet::Bullet(vector3 offset, matrix4 root) : MyEntity("Minecraft\\bullet4.fbx", "bullet") {
 	m_pCameraMngr = CameraManager::GetInstance();
 	rootPosition = glm::translate(root, offset);
-	this->m_v3Speed = vector3(-0.0f, 0.0f, -0.1f);
+	this->m_v3Speed = vector3(-0.0f, 0.0f, m_fSpeed);
 	this->SetModelMatrix(rootPosition);
 	//m_pRigidbody = new MyRigidBody(this->GetModel()->GetVertexList());
 	//bulletModel->Load("Minecraft\\bullet4.fbx");
