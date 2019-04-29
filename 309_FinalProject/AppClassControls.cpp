@@ -2,7 +2,7 @@
 using namespace Simplex;
 //Mouse
 bool rapidFire = false;
-const int bulletSpray = 19;
+const int bulletSpray = 1;
 void Application::ProcessMouseMovement(sf::Event a_event)
 {
 	//get global mouse position
@@ -44,6 +44,7 @@ void Application::ProcessMousePressed(sf::Event a_event)
 			else if (!rapidFire)
 			{
 				m_v3Bullet = new Bullet(vector3(0.0f, -0.05f, 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
+				m_pEntityMngr->AddBullet(m_v3Bullet);
 			}
 		}
 		else if (!m_pPlayer->IsSighted()) {
@@ -60,9 +61,9 @@ void Application::ProcessMousePressed(sf::Event a_event)
 			else if (!rapidFire)
 			{
 				m_v3Bullet = new Bullet(vector3(0.5f, -0.20f, 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
+				m_pEntityMngr->AddBullet(m_v3Bullet);
 			}
 		}
-		m_pEntityMngr->AddBullet(m_v3Bullet);
 		break;
 	case sf::Mouse::Button::Middle:
 		gui.m_bMousePressed[1] = true;
