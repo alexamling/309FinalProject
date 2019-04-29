@@ -90,12 +90,6 @@ namespace Simplex {
 		*/
 		bool IsSighted();
 
-		/*USAGE:fires the gun
-		ARGUMENTS: ---
-		OUTPUT: ---
-		*/
-		void ShootGun();
-
 		// update methods
 		/*
 		USAGE: Updates the camera and viewmodel positions
@@ -103,7 +97,6 @@ namespace Simplex {
 		OUTPUT: ---
 		*/
 		void Update();
-		void Shoot();
 	private:
 		/*
 		USAGE: initializes member fields 

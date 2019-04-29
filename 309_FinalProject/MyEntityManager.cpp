@@ -199,23 +199,12 @@ void Simplex::MyEntityManager::UpdateCollisions(void)
 		m_mEntityArray[i]->ClearCollisionList();
 	}
 
-	//check collisions
-	/*
-	for (uint i = 0; i < m_uEntityCount - 1; i++)
-	{
-		for (uint j = i + 1; j < m_uEntityCount; j++)
-		{
-			m_mEntityArray[i]->IsColliding(m_mEntityArray[j]);
-		}
-	}
-	*/
-
 	// check bullets against targets
 
 	for (uint i = 0; i < m_uBulletCount; i++) {
 		//std::vector<uint> dimensions = m_pOctRoot->GetPossibleCollisions(m_BulletArray[i].GetRigidBody);
 		for (uint j = 0; j < m_uEntityCount; j++) {
-			if (m_BulletArray[i]->IsColliding(m_mEntityArray[j])) {
+			if (m_BulletArray[i]->IsActive() && m_BulletArray[i]->IsColliding(m_mEntityArray[j])) {
 				m_BulletArray[i]->GetRigidBody()->AddCollisionWith(m_mEntityArray[j]->GetRigidBody());
 			}
 		}
