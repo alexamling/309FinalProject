@@ -1,6 +1,8 @@
 #include "AppClass.h"
 using namespace Simplex;
 //Mouse
+bool rapidFire = false;
+const int bulletSpray = 19;
 void Application::ProcessMouseMovement(sf::Event a_event)
 {
 	//get global mouse position
@@ -23,10 +25,42 @@ void Application::ProcessMousePressed(sf::Event a_event)
 		m_sound.setBuffer(m_soundBuffer);
 		m_sound.play();
 		if (m_pPlayer->IsSighted()) {
-			m_v3Bullet = new Bullet(vector3(0.0f, -0.05f, 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
+			if (rapidFire)
+			{
+				for (int i = 0; i < bulletSpray; i++)
+				{
+					m_v3Bullet = new Bullet(vector3(-0.05f, 0.0f, 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
+					m_pEntityMngr->AddBullet(m_v3Bullet);
+					m_v3Bullet = new Bullet(vector3(-0.05f, -0.1f, 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
+					m_pEntityMngr->AddBullet(m_v3Bullet);
+					m_v3Bullet = new Bullet(vector3(0.05f, 0.0f, 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
+					m_pEntityMngr->AddBullet(m_v3Bullet);
+					m_v3Bullet = new Bullet(vector3(0.05f, -0.1f, 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
+					m_pEntityMngr->AddBullet(m_v3Bullet);
+					m_sound.setBuffer(m_soundBuffer);
+					m_sound.play();
+				}
+			}
+			else if (!rapidFire)
+			{
+				m_v3Bullet = new Bullet(vector3(0.0f, -0.05f, 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
+			}
 		}
 		else if (!m_pPlayer->IsSighted()) {
-			m_v3Bullet = new Bullet(vector3(0.5f, -0.20f, 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
+			if (rapidFire)
+			{
+				for (int i = 0; i < bulletSpray; i++)
+				{
+					m_v3Bullet = new Bullet(vector3(0.5f, -0.20f, 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
+					m_pEntityMngr->AddBullet(m_v3Bullet);
+					m_sound.setBuffer(m_soundBuffer);
+					m_sound.play();
+				}
+			}
+			else if (!rapidFire)
+			{
+				m_v3Bullet = new Bullet(vector3(0.5f, -0.20f, 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
+			}
 		}
 		m_pEntityMngr->AddBullet(m_v3Bullet);
 		break;
@@ -435,6 +469,12 @@ void Application::ProcessKeyboard(void)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		m_pPlayer->MoveSideways(-m_fMovementSpeed * fMultiplier);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+		rapidFire = true;
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
+		rapidFire = true;
 
 
 #pragma endregion
