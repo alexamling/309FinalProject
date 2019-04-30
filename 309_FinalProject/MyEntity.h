@@ -167,6 +167,7 @@ public:
 	*/
 	bool SharesDimension(MyEntity* const a_pOther);
 
+
 	/*
 	USAGE: Clears the collision list of this entity
 	ARGUMENTS: ---
