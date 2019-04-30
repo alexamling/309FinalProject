@@ -2,9 +2,6 @@
 
 using namespace Simplex;
 
-float Target::m_fTimer = 0.0f;
-float Target::m_fDeltaTime = 0.0f;
-
 Target::Target() : MyEntity("Minecraft\\Target2.fbx", "target")
 {
 	// get a copy of the point list of the model
@@ -19,7 +16,7 @@ Target::Target() : MyEntity("Minecraft\\Target2.fbx", "target")
 			i--;
 		}
 	}
-	
+
 	// set rigid body to be made out of the new list of points
 	MyRigidBody* pRigidBody = GetRigidBody();
 	*pRigidBody = MyRigidBody(lPointList);
@@ -30,28 +27,56 @@ Target::~Target()
 { 
 }
 
-void Target::UpdateTimer(float a_fDeltaTime) 
+void Target::StartRotate(Bullet *a_pBullet)
 {
-	if (m_fTimer >= MAX_TIME)
-	{
-		m_fDeltaTime = 0.0f;
-		return;
-	}
+	// get bullet position on target and calculate radius for angular momentum
+	vector3 v3BPos = a_pBullet->GetRigidBody()->GetCenterGlobal();
+	float fRadius = (v3BPos.y - GetPivotGlobal().y) / sinf(m_fOrientationX);
 
-	m_fTimer += a_fDeltaTime;
+	// use angular momentum calculation to determine the speed
+	float fAngSpeed = (3 * BULLET_MASS * a_pBullet->m_v3Speed.z) /
+		(TARGET_MASS * fRadius);
 
-	if (m_fTimer >= MAX_TIME)
-		m_fDeltaTime = a_fDeltaTime - (m_fTimer - MAX_TIME);
-	else
-		m_fDeltaTime = a_fDeltaTime;
+	// use orientation to determine in which way the bullet was shot
+	float fOrientation = glm::dot(
+		matrix3(a_pBullet->GetModelMatrix()) * AXIS_Z,
+		matrix3(GetModelMatrix()) * AXIS_Z
+	) >= 0 ? 1.0f : -1.0f;
+
+	// get velocity by multiplying direction times speed
+	m_fAngVelocity = fOrientation * fAngSpeed;
+
+	a_pBullet->SetActive(false); // deactivate bullet
+
+	// set rotating to true
+	m_bRotating = true;
 }
 
 void Target::Rotate() 
 {
-	//float fTime = glm::clamp(m_fTimer / 20.0f, 0.0f, 1.0f);
-	//float fAngle = 0.0f * fTime + (-PI / 2.0f) * (1.0f - fTime);
-	float fAngSpeed = (-PI / 2.0f) / MAX_TIME;
-	float fDeltaAngle = fAngSpeed * m_fDeltaTime;
-	SetModelMatrix(glm::rotate(GetModelMatrix(), fDeltaAngle, AXIS_X));
+	if (!m_bRotating)
+		return;
+
+	// rotate by angular velocity
+	SetModelMatrix(glm::rotate(GetModelMatrix(), m_fAngVelocity, AXIS_X));
+	m_fOrientationX += m_fAngVelocity;
+
+	// divide angular velocity / 2
+	m_fAngVelocity /= 1.2f;
+
+	// if division is less than certain amount, set velocity to 0 & rotating to false
+	if (abs(m_fAngVelocity) < 0.001f)
+	{
+		m_fAngVelocity = 0.0f;
+		m_bRotating = false;
+	}
+
+}
+
+vector3 Target::GetPivotGlobal()
+{
+	return vector3(
+		GetModelMatrix() * vector4(m_v3Pivot, 1.0f)
+	);
 }
 
