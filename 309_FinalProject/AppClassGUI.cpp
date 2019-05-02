@@ -44,6 +44,7 @@ void Application::DrawGUI(void)
 			ImGui::Separator();
 			ImGui::Text("Control:\n");
 			ImGui::Text("   WASD: Movement\n");
+			ImGui::Text("   R/F: Multishot On/Off\n");
 			ImGui::Text("   Left Mouse: Fire\n");
 			ImGui::Text("   Right Mouse: Activate FPS Camera\n");
 			ImGui::Text("   Middle Mouse: Toggle Ironsights\n");

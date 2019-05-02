@@ -208,12 +208,15 @@ void Simplex::MyEntityManager::UpdateCollisions(void)
 
 	for (uint i = 0; i < m_uBulletCount; i++) {
 		//std::vector<uint> dimensions = m_pOctRoot->GetPossibleCollisions(m_BulletArray[i].GetRigidBody);
-		for (uint j = 0; j < m_uEntityCount; j++) {
-			if (m_BulletArray[i]->IsActive() && m_BulletArray[i]->IsColliding(m_mEntityArray[j])) {
-				// starts rotation if bullet collides with target
-				((Target*)m_mEntityArray[j])->StartRotate(m_BulletArray[i]); 
+		//if (m_BulletArray[i].dimen) {
+			for (uint j = 0; j < m_uEntityCount; j++) {
+				if (m_BulletArray[i]->IsActive() && m_BulletArray[i]->IsColliding(m_mEntityArray[j])) {
+					// starts rotation if bullet collides with target
+					m_BulletArray[i]->SetActive(false);
+					((Target*)m_mEntityArray[j])->StartRotate(m_BulletArray[i]);
+				}
 			}
-		}
+		//}
 	}
 }
 void Simplex::MyEntityManager::AddEntity(String a_sFileName, String a_sUniqueID)

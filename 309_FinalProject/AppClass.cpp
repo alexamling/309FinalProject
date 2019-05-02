@@ -24,8 +24,11 @@ void Application::InitVariables(void)
 		{
 			uIndex++;
 			m_pEntityMngr->AddEntity(new Target());
-			vector3 v3position = vector3(glm::ballRand(25.0f));
-			matrix4 m4position = glm::translate(v3position);
+			float distributionAngle = PI / m_uObjects * 2 * (j + nSquare * i);
+			vector2 circlePos = vector2(cos(distributionAngle)*25.0f, sin(distributionAngle)*25.0f);
+			vector3 v3position = vector3(circlePos.x,-1.5f, circlePos.y);
+			float angle=PI-distributionAngle+PI/2.0f;
+			matrix4 m4position = glm::rotate(glm::translate(v3position),angle,AXIS_Y);
 			m_pEntityMngr->SetModelMatrix(m4position);
 		}
 	}
@@ -49,7 +52,7 @@ void Application::Update(void)
 
 	//m_v3Bullet->Update();
 	m_pMeshMngr->AddCubeToRenderList(glm::scale(vector3(200.0f, 1.0f, 200.0f))*glm::translate(vector3(0.0f, -2.0f, 0.0f)), vector3(0.96f, 0.87f, 0.70f)); // as reference for movement
-	m_pMeshMngr->AddCubeToRenderList(glm::scale(vector3(5.0f)), C_GREEN);
+	//m_pMeshMngr->AddCubeToRenderList(glm::scale(vector3(5.0f)), C_GREEN);
 
 	//Update the system so it knows how much time has passed since the last call
 	m_pSystem->Update();

@@ -2,7 +2,7 @@
 using namespace Simplex;
 //Mouse
 bool rapidFire = false;
-const int bulletSpray = 1;
+const int bulletSpray = 20;
 void Application::ProcessMouseMovement(sf::Event a_event)
 {
 	//get global mouse position
@@ -29,13 +29,15 @@ void Application::ProcessMousePressed(sf::Event a_event)
 			{
 				for (int i = 0; i < bulletSpray; i++)
 				{
-					m_v3Bullet = new Bullet(vector3(-0.05f, 0.0f, 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
+					/*m_v3Bullet = new Bullet(vector3(-0.05f, 0.0f, 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
 					m_pEntityMngr->AddBullet(m_v3Bullet);
 					m_v3Bullet = new Bullet(vector3(-0.05f, -0.1f, 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
 					m_pEntityMngr->AddBullet(m_v3Bullet);
 					m_v3Bullet = new Bullet(vector3(0.05f, 0.0f, 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
 					m_pEntityMngr->AddBullet(m_v3Bullet);
 					m_v3Bullet = new Bullet(vector3(0.05f, -0.1f, 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
+					m_pEntityMngr->AddBullet(m_v3Bullet);*/
+					m_v3Bullet = new Bullet(vector3(glm::diskRand(0.05f), 0.25f), m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
 					m_pEntityMngr->AddBullet(m_v3Bullet);
 					m_sound.setBuffer(m_soundBuffer);
 					m_sound.play();
@@ -158,7 +160,7 @@ void Application::ProcessKeyReleased(sf::Event a_event)
 		bFPSControl = !bFPSControl;
 		m_pCameraMngr->SetFPS(bFPSControl);
 		break;
-	/*case sf::Keyboard::PageUp:
+	case sf::Keyboard::PageUp:
 		++m_uOctantID;
 		if (m_uOctantID >= m_pRoot->GetOctantCount())
 			m_uOctantID = - 1;
@@ -185,7 +187,7 @@ void Application::ProcessKeyReleased(sf::Event a_event)
 			SafeDelete(m_pRoot);
 			m_pRoot = new MyOctant(m_uOctantLevels, 5);
 		}
-		break;*/
+		break;
 	case sf::Keyboard::LShift:
 	case sf::Keyboard::RShift:
 		m_bModifier = false;
@@ -475,7 +477,7 @@ void Application::ProcessKeyboard(void)
 		rapidFire = true;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
-		rapidFire = true;
+		rapidFire = false;
 
 
 #pragma endregion

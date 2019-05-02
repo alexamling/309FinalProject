@@ -17,11 +17,26 @@ namespace Simplex
 		m_uLevel = 1;
 
 		std::vector<vector3> vertecies;
+		vector3 max=m_pEntityMngr->GetEntity(0)->GetRigidBody()->GetMinGlobal();
+		vector3 min=m_pEntityMngr->GetEntity(0)->GetRigidBody()->GetMinGlobal();
 
 		for (int i = 0; i < m_pEntityMngr->GetEntityCount(); i++) {
 			MyRigidBody* rb = m_pEntityMngr->GetEntity(i)->GetRigidBody();
 			vertecies.push_back(rb->GetMinGlobal());
 			vertecies.push_back(rb->GetMaxGlobal());
+
+			vector3 tempMin = rb->GetMinGlobal();
+			vector3 tempMax = rb->GetMaxGlobal();
+
+			if (tempMax.x > max.x) max.x = tempMax.x;
+			if (tempMax.y > max.y) max.y = tempMax.y;
+			if (tempMax.z > max.z) max.z = tempMax.z;
+
+			if (tempMin.x < min.x) min.x = tempMin.x;
+			if (tempMin.y < min.y) min.y = tempMin.y;
+			if (tempMin.z < min.z) min.z = tempMin.z;
+
+
 		}
 		MyRigidBody shell = MyRigidBody(vertecies);
 		vector3 v3halfWidth = shell.GetHalfWidth();
@@ -34,7 +49,8 @@ namespace Simplex
 		}
 		m_fSize *= 2;
 
-		m_v3Center = shell.GetCenterGlobal();
+		//m_v3Center = shell.GetCenterGlobal();
+		m_v3Center = (max + min) / 2.0f;
 		m_v3Max = m_v3Center + v3halfWidth;
 		m_v3Min = m_v3Center - v3halfWidth;
 
