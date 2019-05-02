@@ -10,7 +10,9 @@ Date: 2019/04
 #include "Bullet.h"
 #include "MyEntityManager.h"
 
-#define MAX_TIME 20.0f
+#define BULLET_MASS 1.0f
+#define TARGET_MASS 5.0f
+#define INITIAL_ANGLE PI / 2.0f
 
 namespace Simplex
 {
@@ -18,14 +20,17 @@ namespace Simplex
 class Target : public MyEntity
 {
 private:
-	static float Target::m_fTimer;
-	static float Target::m_fDeltaTime;
+	vector3 m_v3Pivot;
+	float m_fAngVelocity;
+	float m_fOrientationX = INITIAL_ANGLE;
+	bool m_bRotating;
 
 public:
 	Target();
 	~Target();
+	vector3 GetPivotGlobal();
 
-	static void UpdateTimer(float a_fDeltaTime);
+	void StartRotate(Bullet *a_pBullet);
 	void Rotate();
 
 };

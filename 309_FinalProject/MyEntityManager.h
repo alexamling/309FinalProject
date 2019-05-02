@@ -7,6 +7,7 @@ Date: 2017/07
 
 #include "MyEntity.h"
 #include "Bullet.h"
+#include "Target.h"
 #include <vector>
 
 namespace Simplex
@@ -85,6 +86,12 @@ public:
 	OUTPUT: ---
 	*/
 	void UpdateBullets(void);
+	/*
+	USAGE: Updates the rotations of all the targets
+	ARGUMENTS: ---
+	OUTPUT: ---
+	*/
+	void UpdateTargets();
 	/*
 	USAGE: Will update the MyEntity manager
 	ARGUMENTS: ---

@@ -183,10 +183,15 @@ Simplex::MyEntityManager::~MyEntityManager(){Release();};
 void Simplex::MyEntityManager::UpdateBullets() {
 	//move all bullets
 	for (uint i = 0; i < m_BulletArray.size(); i++) {
-		m_BulletArray[i]->Update();
-		m_BulletArray[i]->SetModelMatrix(glm::translate(m_BulletArray[i]->GetModelMatrix(), m_BulletArray[i]->m_v3Speed));
+		if(m_BulletArray[i]->IsActive())
+			m_BulletArray[i]->SetModelMatrix(glm::translate(m_BulletArray[i]->GetModelMatrix(), m_BulletArray[i]->m_v3Speed));
 		m_BulletArray[i]->AddToRenderList();
 	}
+}
+void Simplex::MyEntityManager::UpdateTargets()
+{
+	for (uint i = 0; i < m_uEntityCount; ++i)
+		((Target*)m_mEntityArray[i])->Rotate();
 }
 void Simplex::MyEntityManager::UpdateCollisions(void)
 {
@@ -205,7 +210,8 @@ void Simplex::MyEntityManager::UpdateCollisions(void)
 		//std::vector<uint> dimensions = m_pOctRoot->GetPossibleCollisions(m_BulletArray[i].GetRigidBody);
 		for (uint j = 0; j < m_uEntityCount; j++) {
 			if (m_BulletArray[i]->IsActive() && m_BulletArray[i]->IsColliding(m_mEntityArray[j])) {
-				m_BulletArray[i]->GetRigidBody()->AddCollisionWith(m_mEntityArray[j]->GetRigidBody());
+				// starts rotation if bullet collides with target
+				((Target*)m_mEntityArray[j])->StartRotate(m_BulletArray[i]); 
 			}
 		}
 	}

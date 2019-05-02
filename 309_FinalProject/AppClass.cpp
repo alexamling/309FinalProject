@@ -24,10 +24,8 @@ void Application::InitVariables(void)
 		{
 			uIndex++;
 			m_pEntityMngr->AddEntity(new Target());
-			vector3 v3position;
-			v3position = vector3(5.0f);
-			
-			matrix4 m4position = glm::translate(v3position) *glm::rotate(IDENTITY_M4, static_cast<float>(PI), AXIS_Y);
+			vector3 v3position = vector3(glm::ballRand(25.0f));
+			matrix4 m4position = glm::translate(v3position);
 			m_pEntityMngr->SetModelMatrix(m4position);
 		}
 	}
@@ -39,9 +37,6 @@ void Application::InitVariables(void)
 	//m_pBullet->Load("Minecraft\\bullet4.fbx");
 	m_v3Bullet = new Bullet(m_pCameraMngr->GetCamera(-1)->GetForward(),m_pCameraMngr->GetCamera(-1)->GetCameraSpaceAdjusted());
 	m_pEntityMngr->AddBullet(m_v3Bullet);
-
-	m_pTarget = new Target();
-	m_pTarget->SetModelMatrix(glm::translate(vector3(0, 0, 20)));
 
 	m_pPlayer->SetGun(m_pGun);
 }
@@ -55,12 +50,9 @@ void Application::Update(void)
 	//m_v3Bullet->Update();
 	m_pMeshMngr->AddCubeToRenderList(glm::scale(vector3(200.0f, 1.0f, 200.0f))*glm::translate(vector3(0.0f, -2.0f, 0.0f)), vector3(0.96f, 0.87f, 0.70f)); // as reference for movement
 	m_pMeshMngr->AddCubeToRenderList(glm::scale(vector3(5.0f)), C_GREEN);
-	m_pTarget->AddToRenderList(true);
 
 	//Update the system so it knows how much time has passed since the last call
 	m_pSystem->Update();
-	Target::UpdateTimer(m_pSystem->GetDeltaTime(0));
-	m_pTarget->Rotate();
 
 	//Is the ArcBall active?
 	ArcBall();
@@ -72,6 +64,7 @@ void Application::Update(void)
 	m_pEntityMngr->UpdateBullets();
 	m_pRoot->UpdateBulletDimensions();
 	m_pEntityMngr->UpdateCollisions();
+	m_pEntityMngr->UpdateTargets();
 
 	//Add objects to render list
 	m_pEntityMngr->AddEntityToRenderList(-1, true);

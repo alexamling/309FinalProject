@@ -70,7 +70,6 @@ private:
 	Model* m_pGun = nullptr;	
 
 	Player* m_pPlayer = nullptr;
-	Target* m_pTarget = nullptr;
 
 public:
 #pragma region Constructor / Run / Destructor
