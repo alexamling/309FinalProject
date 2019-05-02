@@ -25,9 +25,9 @@ void Application::InitVariables(void)
 			uIndex++;
 			m_pEntityMngr->AddEntity(new Target());
 			vector3 v3position;
-			v3position = vector3(0.0f + i, 0.0f + j, 10.0f+j);
+			v3position = vector3(5.0f);
 			
-			matrix4 m4position = glm::translate(v3position)*glm::rotate(IDENTITY_M4, static_cast<float>(PI), AXIS_Y);
+			matrix4 m4position = glm::translate(v3position) *glm::rotate(IDENTITY_M4, static_cast<float>(PI), AXIS_Y);
 			m_pEntityMngr->SetModelMatrix(m4position);
 		}
 	}
