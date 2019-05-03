@@ -32,8 +32,9 @@ void Target::StartRotate(Bullet *a_pBullet)
 	// get bullet position on target and calculate radius for angular momentum
 	vector3 v3BPos = a_pBullet->GetRigidBody()->GetCenterGlobal();
 	float fRadius = (v3BPos.y - GetPivotGlobal().y) / sinf(m_fOrientationX);
+	m_fRadii.push_back(fRadius);
 
-	// use angular momentum calculation to determine the speed
+	// use angular momentum calculation to determine the speed ~ estimation
 	float fAngSpeed = (3 * BULLET_MASS * a_pBullet->m_v3Speed.z) /
 		(TARGET_MASS * fRadius);
 
@@ -43,10 +44,13 @@ void Target::StartRotate(Bullet *a_pBullet)
 		matrix3(GetModelMatrix()) * AXIS_Z
 	) >= 0 ? 1.0f : -1.0f;
 
+	m_fOrientations.push_back(fOrientation);
+
 	// get velocity by multiplying direction times speed
 	m_fAngVelocity = fOrientation * fAngSpeed;
 
-	a_pBullet->SetActive(false); // deactivate bullet
+	//a_pBullet->SetActive(false); // deactivate bullet
+	m_lBulletsStuck.push_back(a_pBullet);
 
 	// set rotating to true
 	m_bRotating = true;
@@ -59,7 +63,21 @@ void Target::Rotate()
 
 	// rotate by angular velocity
 	SetModelMatrix(glm::rotate(GetModelMatrix(), m_fAngVelocity, AXIS_X));
+
+	// rotate bullets attached
+	for (uint i = 0; i < m_lBulletsStuck.size(); i++)
+	{
+	
+		// position the bullets so are "stuck" in the target and rotate with it
+		m_lBulletsStuck[i]->SetModelMatrix(
+			glm::translate(GetModelMatrix(), m_fRadii[i] * AXIS_Y + (m_fOrientations[i] * 0.025f + 0.015f) * AXIS_Z) * 
+			(m_fOrientations[i] == -1.0f ? glm::rotate(static_cast<float>(PI), AXIS_Y) : IDENTITY_M4)
+		);
+	}
+
 	m_fOrientationX += m_fAngVelocity;
+
+
 
 	// divide angular velocity / 2
 	m_fAngVelocity /= 1.2f;

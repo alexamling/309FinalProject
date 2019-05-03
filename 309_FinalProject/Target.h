@@ -24,6 +24,9 @@ private:
 	float m_fAngVelocity;
 	float m_fOrientationX = INITIAL_ANGLE;
 	bool m_bRotating;
+	std::vector<float> m_fRadii;
+	std::vector<float> m_fOrientations;
+	std::vector<Bullet*> m_lBulletsStuck;
 
 public:
 	Target();

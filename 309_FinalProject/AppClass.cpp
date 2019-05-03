@@ -70,7 +70,7 @@ void Application::Update(void)
 	m_pEntityMngr->UpdateTargets();
 
 	//Add objects to render list
-	m_pEntityMngr->AddEntityToRenderList(-1, true);
+	m_pEntityMngr->AddEntityToRenderList(-1);
 }
 void Application::Display(void)
 {
