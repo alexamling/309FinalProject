@@ -10,11 +10,7 @@ void Application::InitVariables(void)
 	m_soundBGM.play();
 	
 
-#ifdef DEBUG
 	uint uInstances = 100;
-#else
-	uint uInstances = 1849;
-#endif
 	int nSquare = static_cast<int>(std::sqrt(uInstances));
 	m_uObjects = nSquare * nSquare;
 	uint uIndex = -1;
